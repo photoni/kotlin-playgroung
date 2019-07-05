@@ -9,22 +9,8 @@ class IndicatorsTest {
     fun sma() {
         val n=5
         val arr = doubleArrayOf(11.0,12.0,13.0,14.0,15.0,16.0,17.0)
-        var sma = sma(n, arr)
+        var sma = Indicators.sma(n, arr)
         println("result ${sma.contentToString()}")
-    }
-
-    private fun sma(n: Int, arr: DoubleArray): DoubleArray {
-        var sma = DoubleArray(7) { Double.NEGATIVE_INFINITY }
-        var tmp = DoubleArray(n)
-
-        for (i in 0 until n - 1) {
-            tmp[i] = arr[i]
-        }
-        for (i in n - 1 until arr.size) {
-            tmp[i % n] = arr[i]
-            sma[i] = tmp.average()
-        }
-        return sma
     }
 
 
