@@ -13,6 +13,17 @@ class IndicatorsTest {
         println("result ${sma.contentToString()}")
     }
 
+    @Test
+    fun ema() {
+        val n=5
+        val arr = doubleArrayOf(11.0,12.0,13.0,14.0,15.0,16.0,17.0)
+        var emas = Indicators.ema(n, arr)
+        println("result ${emas.contentToString()}")
+
+    }
+
+
+
 
     @Test
     fun doubleArrayAssignmentPerformance() {
