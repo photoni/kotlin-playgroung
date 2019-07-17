@@ -81,14 +81,33 @@ object Indicators {
     fun macdSignalLine(arr: DoubleArray): DoubleArray {
         /* SignalLine = EMA(9) of Macd Line */
         val macdLine = macdLine(arr)
-        val ema=ema(n9, macdLine.sliceArray((n26-1) until (macdLine.size)))
+        val ema = ema(n9, macdLine.sliceArray((n26 - 1) until (macdLine.size)))
 
         /* we copy ema into the result array */
         var signalLine = DoubleArray(macdLine.size) { Double.NEGATIVE_INFINITY }
-        for (i in (n26-1) until (macdLine.size)){
-            signalLine[i]=ema[i-(n26-1)]
+        for (i in (n26 - 1) until (macdLine.size)) {
+            signalLine[i] = ema[i - (n26 - 1)]
         }
         return signalLine
+    }
+
+    /**
+     * Macd Histogram  (Macd - Macd Signal Line)
+     * @param n time period
+     * @param arr time series
+     */
+    fun macdHistogram(arr: DoubleArray): DoubleArray {
+        /* SignalLine = EMA(9) of Macd Line */
+        val macdLine = macdLine(arr)
+        val signaLine = macdSignalLine(arr)
+
+        /* we copy ema into the result array */
+        var macdHistogram = DoubleArray(macdLine.size) { Double.NEGATIVE_INFINITY }
+        for (i in 0 until (macdLine.size)) {
+            if(macdLine[i]!=Double.NEGATIVE_INFINITY && signaLine[i]!=Double.NEGATIVE_INFINITY )
+                macdHistogram[i] = macdLine[i]-signaLine[i]
+        }
+        return macdHistogram
     }
 
 
