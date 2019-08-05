@@ -3,7 +3,7 @@ package org.photoni.math.analysis
 /**
  * Contains all the indicators functions
  */
-object Indicators {
+object MA {
     const val n12 = 12
     const val n26 = 26
     const val n9 = 9
