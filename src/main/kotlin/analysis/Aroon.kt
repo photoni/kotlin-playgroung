@@ -19,20 +19,24 @@ object Aroon {
         return up
     }
 
-    fun daysFromHigh(index:Int,days:Int,arr: DoubleArray): Int {
-        var indexOfHigh:Int=0
-        var high:Double=0.0
-        for (i in 0..days){
-            val currentIndex = index + i
+    /**
+     * @param index the index of the array to start from
+     * @param days the number of days to go backward
+     * @param arr the array of values
+     */
+    fun indexOfHighLow(index:Int,days:Int,arr: DoubleArray,findLow: Boolean): Int {
+        var indexOfHighLow:Int=0
+        var highLow:Double=if(findLow) Double.POSITIVE_INFINITY else Double.NEGATIVE_INFINITY
+        val start = Math.max(0,index - days + 1)
+        val signum=if(findLow) -1 else 1
+        for (i in start..index){
 
-            if(arr[currentIndex] > high){
-                high=arr[currentIndex]
-                indexOfHigh=currentIndex
+            if((arr[i] - highLow)*signum>0){
+                highLow=arr[i]
+                indexOfHighLow=i
             }
         }
-        return indexOfHigh-index
-
-
+        return indexOfHighLow
     }
 
 
