@@ -1,7 +1,7 @@
-package org.photoni.math.analysis
+package analysis
 
 /**
- * Contains all the indicators functions
+ * Indicators functions based on moving averages
  */
 object MA {
     const val n12 = 12
