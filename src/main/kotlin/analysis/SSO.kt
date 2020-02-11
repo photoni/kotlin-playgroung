@@ -18,7 +18,6 @@ object SSO {
     const val n3 = 3
     private const val upThreshold = 80
     private const val downThreshold = 20
-    private const val neutralThreshold = 50
 
 
     /**
@@ -49,7 +48,7 @@ object SSO {
      */
     fun sso(arr: DoubleArray, days: Int): DoubleArray {
         var d = so(arr, days)
-        var sso = MA.sma(n3, arr)
+        var sso = MA.sma(n3, d)
         return sso
     }
 
@@ -63,7 +62,7 @@ object SSO {
         for (i in days - 1 until arr.size) {
             var highestHigh = Functions.highLow(i, days, arr, false)
             var lowestLow = Functions.highLow(i, days, arr, true)
-            var currentClose = arr[arr.size - 1]
+            var currentClose = arr[i]
             var k = (currentClose - lowestLow) / (highestHigh - lowestLow)
             ks[i] = k * 100
         }
@@ -78,7 +77,7 @@ object SSO {
      */
     fun so(arr: DoubleArray, days: Int): DoubleArray {
         var ks = k(arr, days)
-        var d = MA.sma(n3, arr)
+        var d = MA.sma(n3, ks)
         return d
     }
 
